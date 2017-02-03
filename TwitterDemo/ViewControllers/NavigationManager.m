@@ -10,11 +10,14 @@
 #import "TwitterClient.h"
 #import "TweetListViewController.h"
 #import "LoginViewController.h"
+#import "ProfileViewController.h"
 
 @interface NavigationManager ()
 @property (nonatomic, assign) BOOL isLoggedIn;
 @property (nonatomic, strong) UINavigationController *navigationController;
 @property (nonatomic, strong) UINavigationController *tweetListNavigationController;
+@property (nonatomic, strong) UINavigationController *profileNavigationController;
+
 
 @end
 
@@ -42,14 +45,8 @@
 }
 
 - (UIViewController *)loggedInVC {
-    [self setupLoggedInNavController];
-    UITabBarController *tabBarController = [[UITabBarController alloc] init];
-    NSArray* controllers = [NSArray arrayWithObjects:self.tweetListNavigationController, nil];
-    tabBarController.viewControllers = controllers;
-    return tabBarController;
-}
-
-- (void) setupLoggedInNavController {
+    
+    //homeline vc
     if(self.tweetListNavigationController == nil) {
         TweetListViewController *tweetListViewController = [[TweetListViewController alloc] initWithNibName:@"TweetListViewController" bundle:nil];
         self.tweetListNavigationController = [[UINavigationController alloc] initWithRootViewController:tweetListViewController];
@@ -57,8 +54,21 @@
         UIImage *homeIconImage = [UIImage imageNamed: @"home-icon.png"];
         [self.tweetListNavigationController.tabBarItem setImage:homeIconImage];
     }
+    
+    //profile vc
+    if(self.profileNavigationController == nil) {
+        ProfileViewController *profileViewController = [[ProfileViewController alloc] initWithNibName:@"ProfileViewController" bundle: nil];
+        self.profileNavigationController = [[UINavigationController alloc] initWithRootViewController:profileViewController];
+        UIImage *profileIconImage = [UIImage imageNamed: @"profile-icon.png"];
+        [self.profileNavigationController.tabBarItem setImage:profileIconImage];
+    }
 
+    UITabBarController *tabBarController = [[UITabBarController alloc] init];
+    NSArray* controllers = [NSArray arrayWithObjects:self.tweetListNavigationController, self.profileNavigationController, nil];
+    tabBarController.viewControllers = controllers;
+    return tabBarController;
 }
+
 
 - (UIViewController *)loggedOutVC {
     LoginViewController *loginViewController = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
