@@ -42,15 +42,22 @@
 }
 
 - (UIViewController *)loggedInVC {
-    TweetListViewController *tweetListViewController = [[TweetListViewController alloc] initWithNibName:@"TweetListViewController" bundle:nil];
+    [self setupLoggedInNavController];
     UITabBarController *tabBarController = [[UITabBarController alloc] init];
-    if(self.tweetListNavigationController == nil) {
-        self.tweetListNavigationController = [[UINavigationController alloc] initWithRootViewController:tweetListViewController];
-        self.tweetListNavigationController.tabBarItem.title = @"Tweet List";
-    }
     NSArray* controllers = [NSArray arrayWithObjects:self.tweetListNavigationController, nil];
     tabBarController.viewControllers = controllers;
     return tabBarController;
+}
+
+- (void) setupLoggedInNavController {
+    if(self.tweetListNavigationController == nil) {
+        TweetListViewController *tweetListViewController = [[TweetListViewController alloc] initWithNibName:@"TweetListViewController" bundle:nil];
+        self.tweetListNavigationController = [[UINavigationController alloc] initWithRootViewController:tweetListViewController];
+        self.tweetListNavigationController.tabBarItem.title = @"Tweet List";
+        UIImage *homeIconImage = [UIImage imageNamed: @"home-icon.png"];
+        [self.tweetListNavigationController.tabBarItem setImage:homeIconImage];
+    }
+
 }
 
 - (UIViewController *)loggedOutVC {
