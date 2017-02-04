@@ -7,8 +7,13 @@
 //
 
 #import "ProfileViewController.h"
+#import "User.h"
+#import <AFNetworking/UIImageView+AFNetworking.h>
 
 @interface ProfileViewController ()
+@property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
+@property (weak, nonatomic) IBOutlet UILabel *profileName;
+@property (weak, nonatomic) IBOutlet UILabel *profileHandle;
 
 @end
 
@@ -16,7 +21,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    User *currentUser = [User currentUser];
+    NSURL *profileImageUrl = [NSURL URLWithString:currentUser.profileImageUrl];
+    [self.profileImageView setImageWithURL:profileImageUrl];
+    self.profileName.text = currentUser.name;
+    self.profileHandle.text = currentUser.screenname;
 }
 
 - (void)didReceiveMemoryWarning {

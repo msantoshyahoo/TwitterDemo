@@ -8,8 +8,12 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "User.h"
+
 
 @interface NavigationManager : NSObject
+@property (nonatomic, strong) User* currentUser;
+
 + (instancetype) shared;
 
 - (UIViewController *)rootViewController;

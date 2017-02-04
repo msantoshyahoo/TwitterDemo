@@ -43,7 +43,7 @@
         [tweets addObject:tweet];
     }
     for(Tweet *tweet in tweets){
-        NSLog(@"\n\n\tid:[%@], \n\tcontent:[%@], \n\thandle:[%@], \n\tname:[%@], \n\timage:[%@]\n\n", tweet.tweetId, tweet.content, tweet.handle, tweet.name, tweet.profileImageURL.absoluteString);
+        //NSLog(@"\n\n\tid:[%@], \n\tcontent:[%@], \n\thandle:[%@], \n\tname:[%@], \n\timage:[%@]\n\n", tweet.tweetId, tweet.content, tweet.handle, tweet.name, tweet.profileImageURL.absoluteString);
     }
     return tweets;
 }

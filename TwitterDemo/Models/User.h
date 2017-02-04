@@ -14,7 +14,7 @@
 @property (nonatomic, strong) NSString *screenname;
 @property (nonatomic, strong) NSString *profileImageUrl;
 @property (nonatomic, strong) NSString *tagline;
-
-
++ (User *) currentUser;
++ (void) setCurrentUser:(User *) user;
 - (id)initWithDictionary:(NSDictionary *)dictionary;
 @end

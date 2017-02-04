@@ -98,7 +98,7 @@ NSString * const kTwitterBaseUrl = @"https://api.twitter.com";
          NSLog(@"absoluteString: %@", task.originalRequest.URL.absoluteString);
          NSMutableArray *_tweets = [NSMutableArray array];
          NSArray *tweets = [Tweet tweetsWithArray:responseObject];
-         NSLog(@"getTweetsWithCompletion: %@", responseObject);
+         //NSLog(@"getTweetsWithCompletion: %@", responseObject);
          for(Tweet *tweet in tweets){
              Tweet *savedtweet = self.mapOfTweets[tweet.tweetId];
              if(savedtweet != nil){
@@ -108,7 +108,6 @@ NSString * const kTwitterBaseUrl = @"https://api.twitter.com";
              [self.mapOfTweets setValue:tweet forKey:tweet.tweetId];
          }
          self.timelineTweets = _tweets;
-         //         NSLog(@"getTweetsWithCompletion array size %ld", _tweets.count);
          self.getTweetsCompletion(self.timelineTweets, nil);
      }
      failure:^(NSURLSessionTask *task, NSError *error) {

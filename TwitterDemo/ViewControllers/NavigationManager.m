@@ -37,6 +37,10 @@
     if(self) {
         TwitterClient *twitterClient = [TwitterClient sharedInstance];
         self.isLoggedIn = twitterClient.isAuthorized;
+        if([User currentUser] == nil) {
+            self.isLoggedIn = NO;
+        }
+        NSLog(@"Current user = %@", [User currentUser]);
         UIViewController *root = self.isLoggedIn ? [self loggedInVC] : [self loggedOutVC];
         self.navigationController = [[UINavigationController alloc] init];
         self.navigationController.viewControllers = @[root];
@@ -45,7 +49,7 @@
 }
 
 - (UIViewController *)loggedInVC {
-    
+
     //homeline vc
     if(self.tweetListNavigationController == nil) {
         TweetListViewController *tweetListViewController = [[TweetListViewController alloc] initWithNibName:@"TweetListViewController" bundle:nil];
